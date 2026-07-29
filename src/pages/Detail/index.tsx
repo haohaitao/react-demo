@@ -4,7 +4,7 @@ import { useNavigate, useParams, useLocation } from "react-router";
 
 import { ArticleContent } from "./style";
 import { Comments } from "@/components/Comments";
-import { usePost, useTagsByIds } from "@/hooks/queries";
+import { usePost, useTagsByIds, useCategoriesByIds } from "@/hooks/queries";
 import { useDocumentTitle } from "@/hooks/useDocumentTitle";
 import { formatDateTime } from "@/api/normalize";
 
@@ -27,6 +27,7 @@ export function Detail() {
 
   const { data: post, isPending } = usePost(id);
   const { data: tags } = useTagsByIds(post?.tagIds ?? []);
+  const { data: categories } = useCategoriesByIds(post?.categoryIds ?? []);
 
   useDocumentTitle(post?.title);
 
@@ -71,10 +72,20 @@ export function Detail() {
 
             <div className="content-footer">
               <div className="article-info">
-                <div>
-                  文章分类：<Tag color="blue">{post.categoryName}</Tag>
+                <div className="flex items-center">
+                  文章分类：
+                  {categories?.map((category) => (
+                    <Tag
+                      color="cyan"
+                      key={category.id}
+                      style={{ paddingRight: 8, cursor: "pointer" }}
+                      onClick={() => navigate(`/catedetail/${category.id}`)}
+                    >
+                      {category.name}
+                    </Tag>
+                  ))}
                 </div>
-                <div>
+                <div className="flex items-center">
                   文章标签：
                   {tags.map((tag) => (
                     <Tag color="blue" key={tag.id} style={{ paddingRight: 8 }}>
@@ -82,18 +93,33 @@ export function Detail() {
                     </Tag>
                   ))}
                 </div>
-                <p>
+                <div className="flex items-center">
                   版权声明：
                   <a
-                    href="https://creativecommons.org/licenses/by-nc/3.0/cn/deed.zh"
+                    href="https://creativecommons.org/licenses/by-nc-nd/4.0/deed.zh-hans"
                     target="_blank"
                     rel="noopener noreferrer"
                   >
                     {" "}
-                    自由转载-署名-非商用
+                    CC BY-NC-ND 4.0 DEED
                   </a>
-                </p>
-                <p>最后编辑时间：{formatDateTime(post.modified)}</p>
+                  <svg
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    style={{ width: 16, height: 16, marginLeft: 8 }}
+                  >
+                    <path stroke="none" d="M0 0h24v24H0z"></path>
+                    <circle cx="12" cy="12" r="9"></circle>
+                    <path d="M14.5 9a3.5 4 0 1 0 0 6"></path>
+                  </svg>
+                </div>
+                <div className="flex items-center">
+                  最后编辑时间：{formatDateTime(post.modified)}
+                </div>
               </div>
 
               <Comments path={pathname} />

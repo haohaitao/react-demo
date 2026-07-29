@@ -5,7 +5,7 @@
  * @LastEditTime: 2022-07-01 10:54:25
  * @LastEditors: pacino
  */
-import styled from 'styled-components';
+import styled from "styled-components";
 
 export const ArticleContent = styled.article`
   animation: fadeIn 0.6s linear;
@@ -100,8 +100,15 @@ export const ArticleContent = styled.article`
     padding: 0 44px;
     &:before {
       margin-right: 5px;
-      content: '#';
+      content: "#";
       color: #f72d84;
     }
+  }
+  .flex {
+    display: flex;
+    margin-bottom: 8px;
+  }
+  .items-center {
+    align-items: center;
   }
 `;

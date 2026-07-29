@@ -57,6 +57,13 @@ export const categoriesQuery = () =>
     queryFn: api.getCategories,
   });
 
+export const categoriesByIdsQuery = (ids: number[]) =>
+  queryOptions({
+    queryKey: queryKeys.categoriesByIds(ids),
+    queryFn: () => api.getCategoriesByIds(ids),
+    staleTime: 30 * 60 * 1000, // 分类几乎不变，缓存久一些
+  });
+
 export const everydayQuery = () =>
   queryOptions({
     queryKey: queryKeys.everyday(),

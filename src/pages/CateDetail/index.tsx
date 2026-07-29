@@ -1,21 +1,21 @@
-import { useState } from 'react';
-import { Pagination } from 'antd';
-import { useParams } from 'react-router';
+import { useState } from "react";
+import { Pagination } from "antd";
+import { useParams } from "react-router";
 
-import { CateWrapper, CateDetailWrapper } from './style';
-import { Sidebar } from '@/components/Sidebar';
-import { PostCard } from '@/components/PostCard';
-import { PostListSkeleton } from '@/components/PostListSkeleton';
-import { usePostsByCategory } from '@/hooks/queries';
-import { useDocumentTitle } from '@/hooks/useDocumentTitle';
-import { CATEGORY_PAGE_SIZE } from '@/config';
+import { CateWrapper, CateDetailWrapper } from "./style";
+import { Sidebar } from "@/components/Sidebar";
+import { PostCard } from "@/components/PostCard";
+import { PostListSkeleton } from "@/components/PostListSkeleton";
+import { usePostsByCategory, useCategoriesByIds } from "@/hooks/queries";
+import { useDocumentTitle } from "@/hooks/useDocumentTitle";
+import { CATEGORY_PAGE_SIZE } from "@/config";
 
 /**
  * 分类详情。
  *
  * 合并了旧的 view/CateDetail/index.js 和 cateDetail.js。
- * 分类名从列表首条数据里取——旧代码写的是 `res.data['0'].category_name`，
- * 该分类下没有文章时会直接抛异常，这里用可选链兜住。
+ * 分类名改为直接查 categories 接口，不再从列表首条文章里取
+ * （旧写法 `res.data['0'].category_name` 在该分类下没有文章时拿不到名字）。
  */
 export function CateDetail() {
   const { id } = useParams<{ id: string }>();
@@ -32,9 +32,12 @@ export function CateDetail() {
   }
 
   const { data, isPending } = usePostsByCategory(id, page);
-  const categoryName = data?.items[0]?.categoryName;
+  const { data: categories } = useCategoriesByIds(
+    Number(id) > 0 ? [Number(id)] : [],
+  );
+  const categoryName = categories?.[0]?.name;
 
-  useDocumentTitle(categoryName ? `${categoryName} - 分类` : '分类详情');
+  useDocumentTitle(categoryName ? `${categoryName} - 分类` : "分类详情");
 
   return (
     <CateWrapper>
@@ -46,9 +49,9 @@ export function CateDetail() {
                 这一行是居中布局，宽度变化会让整行左右重排 */}
             <span
               className="type-title"
-              style={{ display: 'inline-block', minWidth: '4em' }}
+              style={{ display: "inline-block", minWidth: "4em" }}
             >
-              {categoryName ?? ' '}
+              {categoryName ?? " "}
             </span>
             下的文章
           </p>
@@ -56,7 +59,7 @@ export function CateDetail() {
             共有
             <span
               className="type-total"
-              style={{ display: 'inline-block', minWidth: '2em' }}
+              style={{ display: "inline-block", minWidth: "2em" }}
             >
               {data?.total ?? 0}
             </span>
@@ -75,14 +78,14 @@ export function CateDetail() {
         {/* 同 Home：预留分页器高度，避免数据到达时把页面往下顶 */}
         <div style={{ minHeight: 32 }}>
           <Pagination
-            style={{ textAlign: 'right', marginRight: 20 }}
+            style={{ textAlign: "right", marginRight: 20 }}
             current={page}
             total={data?.total ?? 0}
             pageSize={CATEGORY_PAGE_SIZE}
             showSizeChanger={false}
             onChange={(next) => {
               setPage(next);
-              window.scrollTo({ top: 0, behavior: 'instant' });
+              window.scrollTo({ top: 0, behavior: "instant" });
             }}
           />
         </div>

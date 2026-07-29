@@ -21,6 +21,7 @@ export function normalizePost(raw: RawPost): Post {
     // 这里用可选取值明确表达「可能没有」
     categoryId: raw.categories?.[0],
     categoryName: raw.category_name,
+    categoryIds: raw.categories ?? [],
     tagIds: raw.tags ?? [],
     coverImage: raw.content_first_image ?? "",
     pageviews: raw.views ?? 0,

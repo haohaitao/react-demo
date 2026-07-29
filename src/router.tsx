@@ -14,6 +14,7 @@ import {
   postQuery,
   postsByCategoryQuery,
   categoriesQuery,
+  categoriesByIdsQuery,
   everydayQuery,
   latestPostsQuery,
   tagsQuery,
@@ -130,6 +131,10 @@ export const router = createBrowserRouter([
         loader: ({ params }: LoaderFunctionArgs) =>
           Promise.all([
             queryClient.ensureQueryData(postsByCategoryQuery(params.id!, 1)),
+            // 分类名单独查 categories 接口，一起预取避免标题二次闪烁
+            queryClient
+              .ensureQueryData(categoriesByIdsQuery([Number(params.id)]))
+              .catch(() => null),
             ...prefetchSidebar(),
           ]).then(() => null),
       }),

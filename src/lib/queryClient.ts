@@ -25,5 +25,6 @@ export const queryKeys = {
   tags: () => ['tags'] as const,
   tag: (id: number) => ['tag', id] as const,
   categories: () => ['categories'] as const,
+  categoriesByIds: (ids: number[]) => ['categories', 'byIds', ids] as const,
   everyday: () => ['everyday'] as const,
 } as const;

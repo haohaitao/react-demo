@@ -62,6 +62,7 @@ export interface Post {
   /** 首个分类 id。原代码用 categories["0"]，这里改为安全取值 */
   categoryId?: number;
   categoryName?: string;
+  categoryIds: number[];
   tagIds: number[];
   coverImage: string;
   pageviews: number;

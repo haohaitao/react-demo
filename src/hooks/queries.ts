@@ -7,6 +7,7 @@ import {
   tagsQuery,
   tagQuery,
   categoriesQuery,
+  categoriesByIdsQuery,
   everydayQuery,
 } from '@/lib/queryOptions';
 
@@ -74,6 +75,14 @@ export function useTagsByIds(ids: number[]) {
 /** 全部分类 */
 export function useCategories() {
   return useQuery(categoriesQuery());
+}
+
+/** 按 id 批量取分类（文章详情页用） */
+export function useCategoriesByIds(ids: number[]) {
+  return useQuery({
+    ...categoriesByIdsQuery(ids),
+    enabled: ids.length > 0,
+  });
 }
 
 /** 每日一图 */

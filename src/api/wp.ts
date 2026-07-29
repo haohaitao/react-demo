@@ -56,6 +56,14 @@ export function getCategories(): Promise<Category[]> {
   return get<Category[]>(`${WP_API}/categories`);
 }
 
+/** 按 id 批量取分类（文章详情页展示所属分类用） */
+export function getCategoriesByIds(ids: number[]): Promise<Category[]> {
+  return get<Category[]>(`${WP_API}/categories`, {
+    include: ids.join(','),
+    per_page: ids.length,
+  });
+}
+
 /**
  * 「每日一图」页面。
  * 旧实现硬编码了 WP 页面 id 994，这里保持一致但把 id 提到 config 里，
