@@ -1,1 +1,0 @@
-export const IS_MENU_STATE =  'components/is_menu_state'
