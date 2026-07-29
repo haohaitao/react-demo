@@ -88,7 +88,7 @@ export function Detail() {
                 <div className="flex items-center">
                   文章标签：
                   {tags.map((tag) => (
-                    <Tag color="blue" key={tag.id} style={{ paddingRight: 8 }}>
+                    <Tag color="blue" key={tag.id} style={{ marginRight: 8 }}>
                       {tag.name}
                     </Tag>
                   ))}
