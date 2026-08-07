@@ -1,4 +1,4 @@
-import { Spin } from 'antd';
+import { Spin } from "antd";
 
 /**
  * 首次进入站点时的整页 loading。
@@ -9,9 +9,9 @@ import { Spin } from 'antd';
  */
 export function PageFallback() {
   return (
-    <div style={{ textAlign: 'center', padding: '25vh 0' }}>
+    <div style={{ textAlign: "center", padding: "25vh 0" }}>
       <Spin tip="Loading..." size="large">
-        <div style={{ minHeight: 60 }} />
+        <div style={{ minHeight: 500 }} />
       </Spin>
     </div>
   );

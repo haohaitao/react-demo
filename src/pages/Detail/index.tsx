@@ -74,24 +74,32 @@ export function Detail() {
               <div className="article-info">
                 <div className="flex items-center">
                   文章分类：
-                  {categories?.map((category) => (
-                    <Tag
-                      color="cyan"
-                      key={category.id}
-                      style={{ paddingRight: 8, cursor: "pointer" }}
-                      onClick={() => navigate(`/catedetail/${category.id}`)}
-                    >
-                      {category.name}
-                    </Tag>
-                  ))}
+                  {categories?.length
+                    ? categories.map((category) => (
+                        <Tag
+                          color="cyan"
+                          key={category.id}
+                          style={{ marginRight: 8, cursor: "pointer" }}
+                          onClick={() => navigate(`/catedetail/${category.id}`)}
+                        >
+                          {category.name}
+                        </Tag>
+                      ))
+                    : "-"}
                 </div>
                 <div className="flex items-center">
                   文章标签：
-                  {tags.map((tag) => (
-                    <Tag color="blue" key={tag.id} style={{ marginRight: 8 }}>
-                      {tag.name}
-                    </Tag>
-                  ))}
+                  {tags?.length
+                    ? tags.map((tag) => (
+                        <Tag
+                          color="blue"
+                          key={tag.id}
+                          style={{ marginRight: 8 }}
+                        >
+                          {tag.name}
+                        </Tag>
+                      ))
+                    : "-"}
                 </div>
                 <div className="flex items-center">
                   版权声明：
