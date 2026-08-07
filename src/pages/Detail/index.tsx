@@ -1,9 +1,10 @@
-import { Tag, Spin } from "antd";
+import { Tag } from "antd";
 import { LeftOutlined, RightOutlined } from "@ant-design/icons";
 import { useNavigate, useParams, useLocation } from "react-router";
 
 import { ArticleContent } from "./style";
 import { Comments } from "@/components/Comments";
+import { DetailSkeleton } from "@/components/DetailSkeleton";
 import { usePost, useTagsByIds, useCategoriesByIds } from "@/hooks/queries";
 import { useDocumentTitle } from "@/hooks/useDocumentTitle";
 import { formatDateTime } from "@/api/normalize";
@@ -31,10 +32,13 @@ export function Detail() {
 
   useDocumentTitle(post?.title);
 
+  if (isPending) {
+    return <DetailSkeleton />;
+  }
+
   return (
-    <ArticleContent className={isPending ? "detail-loading" : ""}>
-      <Spin tip="Loading..." spinning={isPending}>
-        {post?.previousPostId && (
+    <ArticleContent>
+      {post?.previousPostId && (
           <div
             className="post-nav-l"
             title="上一篇"
@@ -115,9 +119,9 @@ export function Detail() {
                     viewBox="0 0 24 24"
                     fill="none"
                     stroke="currentColor"
-                    stroke-width="2"
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
+                    strokeWidth="2"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
                     style={{ width: 16, height: 16, marginLeft: 8 }}
                   >
                     <path stroke="none" d="M0 0h24v24H0z"></path>
@@ -134,7 +138,6 @@ export function Detail() {
             </div>
           </div>
         )}
-      </Spin>
     </ArticleContent>
   );
 }

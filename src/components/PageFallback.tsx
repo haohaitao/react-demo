@@ -10,7 +10,7 @@ import { Spin } from "antd";
 export function PageFallback() {
   return (
     <div style={{ textAlign: "center", padding: "25vh 0" }}>
-      <Spin tip="Loading..." size="large">
+      <Spin description="Loading..." size="large">
         <div style={{ minHeight: 500 }} />
       </Spin>
     </div>

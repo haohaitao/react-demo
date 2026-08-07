@@ -32,9 +32,9 @@ export function PostListSkeleton({ count = 6 }: PostListSkeletonProps) {
           </div>
           <div className="desc">
             {/* 对应 PostCard 的 .title，高度 30px */}
-            <p className="title">
+            <div className="title">
               <Skeleton.Input active size="small" block />
-            </p>
+            </div>
             {/* 对应 .excerpt，高度 90px，两行正文 */}
             <div className="excerpt">
               <Skeleton

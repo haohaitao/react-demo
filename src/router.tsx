@@ -8,6 +8,8 @@ import { RootLayout } from '@/components/layout/RootLayout';
 import { NotFound } from '@/components/NotFound';
 import { RouteError } from '@/components/RouteError';
 import { PageFallback } from '@/components/PageFallback';
+import { HomePageSkeleton } from '@/components/HomePageSkeleton';
+import { DetailSkeleton } from '@/components/DetailSkeleton';
 import { queryClient } from '@/lib/queryClient';
 import {
   postsQuery,
@@ -77,6 +79,7 @@ export const router = createBrowserRouter([
       page({
         index: true,
         element: <Home />,
+        HydrateFallback: HomePageSkeleton,
         loader: () =>
           Promise.all([
             queryClient.ensureQueryData(postsQuery(1)),
@@ -86,6 +89,7 @@ export const router = createBrowserRouter([
       page({
         path: 'page/:page',
         element: <Home />,
+        HydrateFallback: HomePageSkeleton,
         loader: ({ params }: LoaderFunctionArgs) => {
           // 与 useHomePagination 保持同一套解析规则：非法页码回退到第 1 页
           const parsed = Number(params.page);
@@ -98,6 +102,7 @@ export const router = createBrowserRouter([
       }),
       page({
         path: 'article/:id',
+        HydrateFallback: DetailSkeleton,
         lazy: {
           Component: () => import('@/pages/Detail').then((m) => m.default),
         },

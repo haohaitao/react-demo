@@ -111,4 +111,33 @@ export const ArticleContent = styled.article`
   .items-center {
     align-items: center;
   }
+
+  .detail-skeleton-meta {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+  .detail-skeleton-content {
+    padding: 28px 0 18px;
+  }
+  .detail-skeleton-content .ant-skeleton-paragraph > li {
+    height: 16px;
+    margin-block-start: 18px;
+  }
+  .detail-skeleton-footer {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  @media screen and (max-width: 760px) {
+    margin: 90px 12px 0;
+    padding: 20px;
+
+    .detail-skeleton-meta {
+      align-items: flex-start;
+      flex-direction: column;
+    }
+  }
 `;

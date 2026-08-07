@@ -21,6 +21,18 @@ vi.mock('valine', () => ({
 const { getPost, getTag } = await import('@/api/wp');
 
 describe('Detail 文章详情', () => {
+  it('文章请求未完成时显示详情骨架屏', () => {
+    vi.mocked(getPost).mockImplementation(() => new Promise(() => {}));
+
+    renderWithProviders(<Detail />, {
+      route: '/article/101',
+      path: '/article/:id',
+    });
+
+    expect(screen.getByLabelText('文章详情加载中')).toBeInTheDocument();
+    expect(screen.queryByText('你好，世界')).not.toBeInTheDocument();
+  });
+
   beforeEach(() => {
     vi.mocked(getPost).mockResolvedValue(normalizePost(rawPost));
     vi.mocked(getTag).mockImplementation((id: number) =>
