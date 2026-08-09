@@ -39,105 +39,116 @@ export function Detail() {
   return (
     <ArticleContent>
       {post?.previousPostId && (
-          <div
-            className="post-nav-l"
-            title="上一篇"
-            onClick={() => navigate(`/article/${post.previousPostId}`)}
-          >
-            <span>
-              <LeftOutlined />
-            </span>
-          </div>
-        )}
-        {post?.nextPostId && (
-          <div
-            className="post-nav-r"
-            title="下一篇"
-            onClick={() => navigate(`/article/${post.nextPostId}`)}
-          >
-            <span>
-              <RightOutlined />
-            </span>
-          </div>
-        )}
+        <div
+          className="post-nav-l"
+          title="上一篇"
+          onClick={() => navigate(`/article/${post.previousPostId}`)}
+        >
+          <span>
+            <LeftOutlined />
+          </span>
+        </div>
+      )}
+      {post?.nextPostId && (
+        <div
+          className="post-nav-r"
+          title="下一篇"
+          onClick={() => navigate(`/article/${post.nextPostId}`)}
+        >
+          <span>
+            <RightOutlined />
+          </span>
+        </div>
+      )}
 
-        {post && (
-          <div className="detail-article">
-            <div className="art-header">
-              <h2>{post.title}</h2>
-              <div className="header-info">
-                <span>发布于：{formatDateTime(post.date)}</span>
-                <span>{post.pageviews}次浏览</span>
-                <span>{post.totalComments}条评论</span>
-              </div>
-            </div>
-
-            <div id="blog" dangerouslySetInnerHTML={{ __html: post.content }} />
-
-            <div className="content-footer">
-              <div className="article-info">
-                <div className="flex items-center">
-                  文章分类：
-                  {categories?.length
-                    ? categories.map((category) => (
-                        <Tag
-                          color="cyan"
-                          key={category.id}
-                          style={{ marginRight: 8, cursor: "pointer" }}
-                          onClick={() => navigate(`/catedetail/${category.id}`)}
-                        >
-                          {category.name}
-                        </Tag>
-                      ))
-                    : "-"}
-                </div>
-                <div className="flex items-center">
-                  文章标签：
-                  {tags?.length
-                    ? tags.map((tag) => (
-                        <Tag
-                          color="blue"
-                          key={tag.id}
-                          style={{ marginRight: 8 }}
-                        >
-                          {tag.name}
-                        </Tag>
-                      ))
-                    : "-"}
-                </div>
-                <div className="flex items-center">
-                  版权声明：
-                  <a
-                    href="https://creativecommons.org/licenses/by-nc-nd/4.0/deed.zh-hans"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                  >
-                    {" "}
-                    CC BY-NC-ND 4.0 DEED
-                  </a>
-                  <svg
-                    viewBox="0 0 24 24"
-                    fill="none"
-                    stroke="currentColor"
-                    strokeWidth="2"
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    style={{ width: 16, height: 16, marginLeft: 8 }}
-                  >
-                    <path stroke="none" d="M0 0h24v24H0z"></path>
-                    <circle cx="12" cy="12" r="9"></circle>
-                    <path d="M14.5 9a3.5 4 0 1 0 0 6"></path>
-                  </svg>
-                </div>
-                <div className="flex items-center">
-                  最后编辑时间：{formatDateTime(post.modified)}
-                </div>
-              </div>
-
-              <Comments path={pathname} />
+      {post && (
+        <div className="detail-article">
+          <div className="art-header">
+            <h2>{post.title}</h2>
+            <div className="header-info">
+              <span>发布于：{formatDateTime(post.date)}</span>
+              <span>{post.pageviews}次浏览</span>
+              <span>{post.totalComments}条评论</span>
             </div>
           </div>
-        )}
+
+          <div id="blog" dangerouslySetInnerHTML={{ __html: post.content }} />
+
+          <div className="content-footer">
+            <div className="article-info">
+              <div className="flex items-center">
+                文章分类：
+                {categories?.length
+                  ? categories.map((category) => (
+                      <Tag
+                        color="cyan"
+                        key={category.id}
+                        style={{ marginRight: 8, cursor: "pointer" }}
+                        onClick={() => navigate(`/catedetail/${category.id}`)}
+                      >
+                        {category.name}
+                      </Tag>
+                    ))
+                  : "-"}
+              </div>
+              <div className="flex items-center">
+                文章标签：
+                {tags?.length
+                  ? tags.map((tag) => (
+                      <Tag color="blue" key={tag.id} style={{ marginRight: 8 }}>
+                        {tag.name}
+                      </Tag>
+                    ))
+                  : "-"}
+              </div>
+              <div className="flex items-center">
+                版权声明：
+                <a
+                  href="https://creativecommons.org/licenses/by-nc-nd/4.0/deed.zh-hans"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  {" "}
+                  CC BY-NC-ND 4.0 DEED
+                </a>
+                <svg
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  strokeWidth="2"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  style={{ width: 16, height: 16, marginLeft: 8 }}
+                >
+                  <path stroke="none" d="M0 0h24v24H0z"></path>
+                  <circle cx="12" cy="12" r="9"></circle>
+                  <path d="M14.5 9a3.5 4 0 1 0 0 6"></path>
+                </svg>
+              </div>
+              <div className="flex items-center">
+                最后编辑时间：{formatDateTime(post.modified)}
+              </div>
+            </div>
+            <div className="comments">
+              <button
+                type="button"
+                onClick={() => {
+                  if (post?.link) {
+                    window.open(
+                      `${post.link}#respond`,
+                      "_blank",
+                      "noopener,noreferrer",
+                    );
+                  }
+                }}
+              >
+                发表评论
+              </button>
+            </div>
+            <Comments path={pathname} />
+          </div>
+        </div>
+      )}
     </ArticleContent>
   );
 }

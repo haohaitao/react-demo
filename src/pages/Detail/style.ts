@@ -140,4 +140,20 @@ export const ArticleContent = styled.article`
       flex-direction: column;
     }
   }
+  .comments {
+    width: 100%;
+    margin: 20px 10px 10px 0;
+    padding: 5px;
+    border: 1px solid #ddd;
+    border-radius: 2px;
+    text-align: center;
+
+    button {
+      width: 100%;
+      color: inherit;
+      background: transparent;
+      border: 0;
+      cursor: pointer;
+    }
+  }
 `;
