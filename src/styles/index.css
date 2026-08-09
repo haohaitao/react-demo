@@ -199,6 +199,49 @@ body {
   background: transparent !important;
 }
 
+table {
+  display: block;
+  width: 100%;
+  margin: 24px 0;
+  border-collapse: collapse;
+  border-spacing: 0;
+  font-size: 14px;
+  line-height: 1.6;
+  text-align: left;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+}
+caption {
+  margin-bottom: 10px;
+  color: color-mix(in srgb, var(--text-color) 72%, transparent);
+  font-size: 13px;
+  text-align: left;
+}
+th,
+td {
+  min-width: 110px;
+  padding: 10px 14px;
+  border: 1px solid rgba(127, 127, 127, 0.28);
+  vertical-align: top;
+  word-break: normal;
+}
+th {
+  color: var(--text-color);
+  background: rgba(127, 127, 127, 0.12);
+  font-weight: 600;
+  white-space: nowrap;
+}
+tbody tr:nth-child(even) {
+  background: rgba(127, 127, 127, 0.05);
+}
+tbody tr {
+  transition: background-color 0.2s ease;
+
+  &:hover {
+    background: rgba(64, 158, 255, 0.08);
+  }
+}
+
 /* 路由加载进度条：一段色块来回滑动，不表示真实进度 */
 @keyframes route-progress {
   0% {

@@ -88,7 +88,7 @@ export const CateDetailWrapper = styled.main`
 
   .bg-cover {
     overflow: hidden;
-    width: 200px;
+    width: 240px;
     height: auto;
     clear: both;
     float: left;
@@ -132,7 +132,7 @@ export const CateDetailWrapper = styled.main`
   }
 
   .desc {
-    width: 70%;
+    width: 60%;
     height: 110px;
     background: #fff;
     padding: 7px 15px 10px;

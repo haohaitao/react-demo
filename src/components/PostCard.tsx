@@ -16,7 +16,7 @@ export function getPostCoverImage(post: Post): string {
   if (post.coverImage?.trim()) return post.coverImage;
 
   const imageSrc = post.content.match(
-    /<img\b[^>]*\bsrc\s*=\s*["']([^"']+)["']/i
+    /<img\b[^>]*\bsrc\s*=\s*["']([^"']+)["']/i,
   )?.[1];
 
   return imageSrc || placeholderImage;
@@ -41,7 +41,9 @@ export function PostCard({ post }: PostCardProps) {
         <div
           className="bg-img"
           style={{
-            background: `url(${coverImage}) 100% 100% / 100% 100%`,
+            backgroundImage: `url(${coverImage})`,
+            backgroundPosition: "center center",
+            backgroundSize: "cover",
           }}
         />
       </div>

@@ -27,9 +27,11 @@ export function RouteError() {
   return (
     <MainWrapper>
       <div className="content">
-        <div className="image-box">
-          <img src={pic} alt="error" />
-        </div>
+        {is404 ? (
+          <div className="image-box">
+            <img src={pic} alt="error" />
+          </div>
+        ) : null}
         <h3>{title}</h3>
         <p>
           {detail && <span style={{ marginRight: 8 }}>{detail}</span>}

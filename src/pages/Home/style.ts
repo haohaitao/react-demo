@@ -91,7 +91,7 @@ export const SectionContent = styled.main`
 
   .bg-cover {
     overflow: hidden;
-    width: 200px;
+    width: 240px;
     height: auto;
     clear: both;
     float: left;
@@ -135,7 +135,7 @@ export const SectionContent = styled.main`
   }
 
   .desc {
-    width: 70%;
+    width: 60%;
     height: 110px;
     padding: 7px 15px 10px;
     box-sizing: border-box;
