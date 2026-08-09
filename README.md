@@ -9,10 +9,9 @@
 # 1. 安装依赖（需要 Node >= 22.22.0，你本机是 22.23.1，满足）
 pnpm install
 
-# 2. 配置环境变量
-cp .env.example .env.local
-# 编辑 .env.local，填入 Valine 的 appId / appKey
-# （旧值可从 react-demo/src/view/Detail/index.js 第 56-57 行取得）
+# 2.（可选）在 .env.local 中配置接口地址
+# VITE_API_BASE_URL=https://example.com
+# PROXY_TARGET=https://example.com
 
 # 3. 启动开发服务器
 pnpm dev
@@ -78,12 +77,10 @@ pnpm format && pnpm lint && pnpm typecheck && pnpm test
 
 ## 环境变量
 
-| 变量                  | 用途                     | 开发环境             | 生产环境   |
-| --------------------- | ------------------------ | -------------------- | ---------- |
-| `VITE_API_BASE_URL`   | 接口根地址               | 留空（走 vite 代理） | 填真实域名 |
-| `PROXY_TARGET`        | 开发代理目标             | `api地址`            | 不生效     |
-| `VITE_VALINE_APP_ID`  | Valine LeanCloud App ID  | 必填                 | 必填       |
-| `VITE_VALINE_APP_KEY` | Valine LeanCloud App Key | 必填                 | 必填       |
+| 变量                | 用途         | 开发环境             | 生产环境   |
+| ------------------- | ------------ | -------------------- | ---------- |
+| `VITE_API_BASE_URL` | 接口根地址   | 留空（走 vite 代理） | 填真实域名 |
+| `PROXY_TARGET`      | 开发代理目标 | 按需覆盖默认地址     | 不生效     |
 
 `PROXY_TARGET` 故意不加 `VITE_` 前缀，这样源站地址不会被打进前端产物。
 
@@ -110,7 +107,6 @@ src/
 │   ├── PostCard          文章卡片（Home 和 CateDetail 共用）
 │   ├── PostListSkeleton  列表加载骨架
 │   ├── Sidebar           侧边栏（原 Slider.js）
-│   ├── Comments          Valine 评论区封装
 │   ├── ScrollToTop       路由变化时滚动置顶
 │   └── NotFound
 ├── pages/            各页面

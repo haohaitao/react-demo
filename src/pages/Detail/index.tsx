@@ -1,9 +1,8 @@
 import { Tag } from "antd";
 import { LeftOutlined, RightOutlined } from "@ant-design/icons";
-import { useNavigate, useParams, useLocation } from "react-router";
+import { useNavigate, useParams } from "react-router";
 
 import { ArticleContent } from "./style";
-import { Comments } from "@/components/Comments";
 import { DetailSkeleton } from "@/components/DetailSkeleton";
 import { usePost, useTagsByIds, useCategoriesByIds } from "@/hooks/queries";
 import { useDocumentTitle } from "@/hooks/useDocumentTitle";
@@ -23,7 +22,6 @@ import { formatDateTime } from "@/api/normalize";
  */
 export function Detail() {
   const { id } = useParams<{ id: string }>();
-  const { pathname } = useLocation();
   const navigate = useNavigate();
 
   const { data: post, isPending } = usePost(id);
@@ -145,7 +143,6 @@ export function Detail() {
                 发表评论
               </button>
             </div>
-            <Comments path={pathname} />
           </div>
         </div>
       )}

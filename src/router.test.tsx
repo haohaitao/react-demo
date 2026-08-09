@@ -15,8 +15,6 @@ vi.mock('@/api/wp', () => ({
   getTag: vi.fn(),
 }));
 
-vi.mock('valine', () => ({ default: class {} }));
-
 const { getPost } = await import('@/api/wp');
 
 /**

@@ -11,13 +11,6 @@ vi.mock('@/api/wp', () => ({
   getTag: vi.fn(),
 }));
 
-// Valine 走动态 import，测试里直接 mock 掉
-vi.mock('valine', () => ({
-  default: class {
-    constructor() {}
-  },
-}));
-
 const { getPost, getTag } = await import('@/api/wp');
 
 describe('Detail 文章详情', () => {

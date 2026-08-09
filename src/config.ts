@@ -24,9 +24,3 @@ export const CATEGORY_PAGE_SIZE = 12;
 
 /** 「每日一图」对应的 WordPress 页面 id */
 export const EVERYDAY_PAGE_ID = 994;
-
-/** Valine 评论系统配置 */
-export const VALINE_CONFIG = {
-  appId: import.meta.env.VITE_VALINE_APP_ID || '',
-  appKey: import.meta.env.VITE_VALINE_APP_KEY || '',
-} as const;

@@ -28,7 +28,6 @@
     "react-dom": "^19.2.8",
     "react-router": "^8.0.0",
     "styled-components": "^6.4.4",
-    "valine": "^1.3.10",
     "zustand": "^5.0.10"
   },
   "devDependencies": {
